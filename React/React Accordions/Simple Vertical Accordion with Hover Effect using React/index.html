@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/16.13.1/umd/react.production.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.1/umd/react-dom.production.min.js'></script>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+body {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+#root {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgb(131, 58, 180);
+	background: linear-gradient( 38deg, rgba(131, 58, 180, 1) 0%, rgba(217, 76, 160, 1) 34%, rgba(252, 176, 69, 1) 100%);
+}
+.accordion_container {
+	width: 300px;
+	background-color: #efefef;
+	box-shadow: 8px 8px 7px #454545;
+	border-radius: 5px;
+	overflow: hidden;
+	border: 3px solid black;
+}
+.accordion_title {
+	width: 100%;
+	height: 50px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	padding-left: 10px;
+	font-family: "Open Sans", sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	background-color: #ffda75;
+}
+.accordion_content {
+	height: 0px;
+	transition: height 0.3s ease-in;
+}
+.show_content {
+	height: 150px;
+	opacity: 1;
+	visibility: visible;
+	transition: height 0.3s ease-out;
+}
+/* Style the list item container divs */
+
+.list_item_container {
+	width: 100%;
+	height: 50px;
+	padding-left: 15px;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	border-top: 1px solid #a8a8a8;
+}
+.accordion_content .list_item_container:first-of-type {
+	border-top: 3px solid black;
+}
+.list_item_container p {
+	font-family: "Open Sans", sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+}
+.list_item_container:hover>p {
+	color: #0072c9;
+}
+</style>
+
+</head>
+<body>
+<div id="root"></div><div id="bcl"><a style="font-size:8pt;text-decoration:none;" href="http://www.devanswer.com">Free Frontend</a></div>
+<script>
+class AccordionMenu extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            contentVisible: true
+        };
+        this.toggleContentVisible = this.toggleContentVisible.bind(this);
+    }
+    toggleContentVisible() {
+        this.setState(prevState => {
+            return { contentVisible: !prevState.contentVisible };
+        });
+    }
+    render() {
+        return /*#__PURE__*/(
+            React.createElement("div", { className: "accordion_container" }, /*#__PURE__*/
+                React.createElement("div", { className: "accordion" }, /*#__PURE__*/
+                    React.createElement("button", {
+                        type: "button",
+                        className: "accordion_title",
+                        onClick: this.toggleContentVisible
+                    }, "Accordion Menu")), /*#__PURE__*/
+                React.createElement("div", {
+                    className: `accordion_content ${this.state.contentVisible ? "show_content" : ""
+                        }`
+                }, /*#__PURE__*/
+                    React.createElement("div", { className: "list_item_container" }, /*#__PURE__*/
+                        React.createElement("p", null, "Item 1")), /*#__PURE__*/
+                    React.createElement("div", { className: "list_item_container" }, /*#__PURE__*/
+                        React.createElement("p", null, "Item 2")), /*#__PURE__*/
+                    React.createElement("div", { className: "list_item_container" }, /*#__PURE__*/
+                        React.createElement("p", null, "Item 3")))));
+    }
+}
+ReactDOM.render( /*#__PURE__*/React.createElement(AccordionMenu, null), document.getElementById("root"));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/16.3.2/umd/react.development.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.3.2/umd/react-dom.development.js'></script>
+<style>
+.collapse {
+  overflow: hidden;
+  transition: 0.4s max-height;
+}
+.collapse > div {
+  overflow: auto;
+}
+.sample-content {
+  background: #ccc;
+  padding: 10px;
+}
+h1, p {
+  margin: 0;
+  text-align: center;
+}
+button {
+  padding: 10px;
+  display: block;
+  background: #333;
+  color: white;
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+<div id="root"></div><div id="bcl"><a style="font-size:8pt;text-decoration:none;" href="http://www.devanswer.com">Free Frontend</a></div>
+<script>
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } const { Component, Fragment } = React;
+class Collapse extends Component {
+    constructor(...args) {
+        super(...args); _defineProperty(this, "state",
+            { childHeight: 0 });
+    }
+    componentDidMount() {
+        const childHeightRaw = this.content.clientHeight;
+        const childHeight = `${childHeightRaw / 16}rem`;
+        this.setState({ childHeight });
+    }
+    render() {
+        const { children, isOpen } = this.props;
+        const { childHeight } = this.state;
+        return /*#__PURE__*/(
+            React.createElement("div", {
+                className: "collapse", style: {
+                    maxHeight: isOpen ? childHeight : 0
+                }
+            }, /*#__PURE__*/
+                React.createElement("div", { ref: content => this.content = content }, children)));
+    }
+}
+Collapse.defaultProps = {
+    isOpen: false
+};
+class App extends Component {
+    constructor(...args) {
+        super(...args); _defineProperty(this, "state",
+            {
+                isOpen: false
+            }); _defineProperty(this, "toggle",
+                () => {
+                    this.setState(state => ({
+                        isOpen: !state.isOpen
+                    }));
+                });
+    }
+    render() {
+        return /*#__PURE__*/(
+            React.createElement(Fragment, null, /*#__PURE__*/
+                React.createElement("button", { onClick: this.toggle }, "toggle"), /*#__PURE__*/
+                React.createElement(Collapse, { isOpen: this.state.isOpen }, /*#__PURE__*/
+                    React.createElement("section", { className: "sample-content" }, /*#__PURE__*/
+                        React.createElement("h1", null, "content"), /*#__PURE__*/
+                        React.createElement("p", null, "content")))));
+    }
+}
+ReactDOM.render( /*#__PURE__*/
+    React.createElement(App, null),
+    document.getElementById('root'));
+</script>
+
+</body>
+</html>

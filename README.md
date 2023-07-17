@@ -7,7 +7,9 @@ Made with
 
 # Changelog
 
-## [Added]
+## [17.07.2023]
+
+- New React Accordion - Simple Vertical Accordion with Hover Effect
 
 ## [12.07.2023]
 
