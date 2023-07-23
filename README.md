@@ -9,7 +9,7 @@ Made with
 
 ## [17.07.2023]
 
-- New React Accordion - Simple Vertical Accordion with Hover Effect
+- 2 new React Accordion - Simple Vertical Accordion with Hover Effect and React Accordion with Toggle Button
 
 ## [12.07.2023]
 
