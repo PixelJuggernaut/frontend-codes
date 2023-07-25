@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js'></script>
+<script src='https://unpkg.com/react-transition-group/dist/react-transition-group.min.js'></script>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@-webkit-keyframes appear {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes appear {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@-webkit-keyframes slideIn {
+	0% {
+		transform: translateX(-2%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+@keyframes slideIn {
+	0% {
+		transform: translateX(-2%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+@-webkit-keyframes shrink {
+	0% {
+		width: 95%;
+	}
+	100% {
+		width: 90%;
+	}
+}
+@keyframes shrink {
+	0% {
+		width: 95%;
+	}
+	100% {
+		width: 90%;
+	}
+}
+</style>
+
+</head>
+<body>
+<div id='root'></div><div id="bcl"><a style="font-size:8pt;text-decoration:none;" href="http://pixeljuggernaut.vercel.app">PixelJuggernaut</a></div>
+<script>
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuOpen: false
+        };
+    }
+    handleMenuClick() {
+        this.setState({ menuOpen: !this.state.menuOpen });
+    }
+    handleLinkClick() {
+        this.setState({ menuOpen: false });
+    }
+    render() {
+        const styles =
+        {
+            container: {
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                zIndex: '99',
+                opacity: 0.9,
+                display: 'flex',
+                alignItems: 'center',
+                background: 'black',
+                width: '100%',
+                color: 'white',
+                fontFamily: 'Lobster'
+            },
+            logo: {
+                margin: '0 auto'
+            },
+            body: {
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                width: '100vw',
+                height: '100vh',
+                filter: this.state.menuOpen ? 'blur(2px)' : null,
+                transition: 'filter 0.5s ease'
+            }
+        };
+        const menu = ['About Us', 'Our Products', 'Services', 'FAQ', 'Contact Us'];
+        const menuItems = menu.map((val, index) => {
+            return /*#__PURE__*/(
+                React.createElement(MenuItem, {
+                    key: index,
+                    delay: `${index * 0.1}s`,
+                    onClick: () => { this.handleLinkClick(); }
+                }, val));
+        });
+        return /*#__PURE__*/(
+            React.createElement("div", null, /*#__PURE__*/
+                React.createElement("div", { style: styles.container }, /*#__PURE__*/
+                    React.createElement(MenuButton, { open: this.state.menuOpen, onClick: () => this.handleMenuClick(), color: "white" }), /*#__PURE__*/
+                    React.createElement("div", { style: styles.logo }, "Logo")), /*#__PURE__*/
+                React.createElement(Menu, { open: this.state.menuOpen },
+                    menuItems), /*#__PURE__*/
+                React.createElement("div", { style: styles.body }, /*#__PURE__*/
+                    React.createElement(Footer, { name: "Menu" }))));
+    }
+}
+class MenuItem extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hover: false
+        };
+    }
+    handleHover() {
+        this.setState({ hover: !this.state.hover });
+    }
+    render() {
+        const styles = {
+            container: {
+                opacity: 0,
+                animation: '1s appear forwards',
+                animationDelay: this.props.delay
+            },
+            menuItem: {
+                fontFamily: `'Open Sans', sans-serif`,
+                fontSize: '1.2rem',
+                padding: '1rem 0',
+                margin: '0 5%',
+                cursor: 'pointer',
+                color: this.state.hover ? 'gray' : '#fafafa',
+                transition: 'color 0.2s ease-in-out',
+                animation: '0.5s slideIn forwards',
+                animationDelay: this.props.delay
+            },
+            line: {
+                width: '90%',
+                height: '1px',
+                background: 'gray',
+                margin: '0 auto',
+                animation: '0.5s shrink forwards',
+                animationDelay: this.props.delay
+            }
+        };
+        return /*#__PURE__*/(
+            React.createElement("div", { style: styles.container }, /*#__PURE__*/
+                React.createElement("div", {
+                    style: styles.menuItem,
+                    onMouseEnter: () => { this.handleHover(); },
+                    onMouseLeave: () => { this.handleHover(); },
+                    onClick: this.props.onClick
+                },
+                    this.props.children), /*#__PURE__*/
+                React.createElement("div", { style: styles.line })));
+    }
+}
+class Menu extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: this.props.open ? this.props.open : false
+        };
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.open !== this.state.open) {
+            this.setState({ open: nextProps.open });
+        }
+    }
+    render() {
+        const styles = {
+            container: {
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                height: this.state.open ? '100%' : 0,
+                width: '100vw',
+                display: 'flex',
+                flexDirection: 'column',
+                background: 'black',
+                opacity: 0.95,
+                color: '#fafafa',
+                transition: 'height 0.3s ease',
+                zIndex: 2
+            },
+            menuList: {
+                paddingTop: '3rem'
+            }
+        };
+        return /*#__PURE__*/(
+            React.createElement("div", { style: styles.container },
+                this.state.open ? /*#__PURE__*/
+                    React.createElement("div", { style: styles.menuList },
+                        this.props.children) :
+                    null));
+    }
+}
+class MenuButton extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: this.props.open ? this.props.open : false,
+            color: this.props.color ? this.props.color : 'black'
+        };
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.open !== this.state.open) {
+            this.setState({ open: nextProps.open });
+        }
+    }
+    handleClick() {
+        this.setState({ open: !this.state.open });
+    }
+    render() {
+        const styles = {
+            container: {
+                height: '32px',
+                width: '32px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                cursor: 'pointer',
+                padding: '4px'
+            },
+            line: {
+                height: '2px',
+                width: '20px',
+                background: this.state.color,
+                transition: 'all 0.2s ease'
+            },
+            lineTop: {
+                transform: this.state.open ? 'rotate(45deg)' : 'none',
+                transformOrigin: 'top left',
+                marginBottom: '5px'
+            },
+            lineMiddle: {
+                opacity: this.state.open ? 0 : 1,
+                transform: this.state.open ? 'translateX(-16px)' : 'none'
+            },
+            lineBottom: {
+                transform: this.state.open ? 'translateX(-1px) rotate(-45deg)' : 'none',
+                transformOrigin: 'top left',
+                marginTop: '5px'
+            }
+        };
+        return /*#__PURE__*/(
+            React.createElement("div", {
+                style: styles.container,
+                onClick: this.props.onClick ? this.props.onClick :
+                    () => { this.handleClick(); }
+            }, /*#__PURE__*/
+                React.createElement("div", { style: { ...styles.line, ...styles.lineTop } }), /*#__PURE__*/
+                React.createElement("div", { style: { ...styles.line, ...styles.lineMiddle } }), /*#__PURE__*/
+                React.createElement("div", { style: { ...styles.line, ...styles.lineBottom } })));
+    }
+}
+function Footer(props) {
+    const styles = {
+        footer: {
+            position: 'absolute',
+            bottom: 0,
+            width: '100%',
+            marginTop: '1rem',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: props.color
+        },
+        line: {
+            height: '1px',
+            width: '90%',
+            background: props.color
+        },
+        text: {
+            padding: '0.5rem'
+        }
+    };
+    return (
+        React.createElement("div", { style: styles.footer }, /*#__PURE__*/
+            React.createElement("div", { style: styles.line }), /*#__PURE__*/
+            React.createElement("div", { style: styles.text }, props.title, " created by your Company")));
+}
+Footer.defaultProps = {
+    color: 'black',
+    title: 'hello world!'
+};
+Footer.propTypes = {
+    color: React.PropTypes.string,
+    title: React.PropTypes.string
+};
+class Main extends React.Component {
+    render() {
+        const styles = {
+            main: {
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                height: '100vh'
+            }
+        };
+        return /*#__PURE__*/(
+            React.createElement("div", { style: styles.main }, /*#__PURE__*/
+                React.createElement(App, null)));
+    }
+}
+ReactDOM.render( /*#__PURE__*/
+    React.createElement(Main, null), document.querySelector('#root'));
+</script>
+
+</body>
+</html>

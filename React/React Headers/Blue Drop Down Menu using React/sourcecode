@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,300' rel='stylesheet' type='text/css'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.min.js'></script>
+<style>
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.menu-container {
+  text-align: center;
+}
+nav ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.nav {
+  display: inline-block;
+  margin: 2rem auto 0;
+  background: #0d2035;
+  color: #fff;
+  text-align: left;
+}
+.nav a {
+  display: block;
+  padding: 0 16px;
+  line-height: inherit;
+  cursor: pointer;
+}
+.nav__menu {
+  line-height: 45px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.nav__menu-item {
+  display: inline-block;
+  position: relative;
+}
+.nav__menu-item:hover {
+  background-color: #00aeef;
+}
+.nav__menu-item:hover .nav__submenu {
+  display: block;
+}
+.nav__submenu {
+  font-weight: 300;
+  text-transform: none;
+  display: none;
+  position: absolute;
+  width: 180px;
+  background-color: #00aeef;
+}
+.nav__submenu-item:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+</style>
+
+</head>
+<body>
+<div id="menu-container"></div><div id="bcl"><a style="font-size:8pt;text-decoration:none;" href="https://pixeljuggernaut.vercel.app/">PixelJuggernaut</a></div>
+<script>
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } class Submenu extends React.Component {
+    render() {
+        return /*#__PURE__*/(
+            React.createElement("ul", { className: "nav__submenu" }, /*#__PURE__*/
+                React.createElement("li", { className: "nav__submenu-item " }, /*#__PURE__*/
+                    React.createElement("a", null, "Our Company")), /*#__PURE__*/
+                React.createElement("li", { className: "nav__submenu-item " }, /*#__PURE__*/
+                    React.createElement("a", null, "Our Team")), /*#__PURE__*/
+                React.createElement("li", { className: "nav__submenu-item " }, /*#__PURE__*/
+                    React.createElement("a", null, "Our Portfolio"))));
+    }
+}
+class Menu extends React.Component {
+    constructor(props) {
+        super(props); _defineProperty(this, "handleHover",
+            () => {
+                this.setState({ showAboutMenu: true });
+            }); _defineProperty(this, "handleLeave",
+                () => {
+                    this.setState({ showAboutMenu: false });
+                }); this.state = { showAboutMenu: false };
+    }
+    render() {
+        return /*#__PURE__*/(
+            React.createElement("nav", { className: "nav" }, /*#__PURE__*/
+                React.createElement("ul", { className: "nav__menu" }, /*#__PURE__*/
+                    React.createElement("li", { className: "nav__menu-item" }, /*#__PURE__*/
+                        React.createElement("a", null, "Home")), /*#__PURE__*/
+                    React.createElement("li", {
+                        className: "nav__menu-item",
+                        onMouseLeave: this.handleLeave
+                    }, /*#__PURE__*/
+                        React.createElement("a", { onMouseEnter: this.handleHover }, "About"),
+                        this.state.showAboutMenu && /*#__PURE__*/React.createElement(Submenu, null)), /*#__PURE__*/
+                    React.createElement("li", { className: "nav__menu-item" }, /*#__PURE__*/
+                        React.createElement("a", null, "Contact")))));
+    }
+}
+ReactDOM.render( /*#__PURE__*/
+    React.createElement(Menu, null),
+    document.getElementById("menu-container"));
+</script>
+
+</body>
+</html>

@@ -7,6 +7,16 @@ Made with
 
 # Changelog
 
+## [25.07.2023]
+
+- New Bootstrap Footers with Gradient Background
+- New Bootstrap Dark Footer
+- New Bootstrap Fixed Header
+- New Bootstrap Animating Navbar Header
+- New Blue Drop Down Menu using React
+- New Full Screen Header Menu with React
+- New React Horizontal Selection Menu
+
 ## [17.07.2023]
 
 - 2 new React Accordion - Simple Vertical Accordion with Hover Effect and React Accordion with Toggle Button
