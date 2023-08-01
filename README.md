@@ -7,6 +7,10 @@ Made with
 
 # Changelog
 
+## [01.08.2023]
+
+- New Bootstrap Progress Bars
+
 ## [25.07.2023]
 
 - New Bootstrap Footers with Gradient Background

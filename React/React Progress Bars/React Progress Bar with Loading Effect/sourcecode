@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- This script got from frontendfreecode.com -->
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/react/16.13.0/umd/react.production.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.0/umd/react-dom.production.min.js'></script>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+* {
+	box-sizing: border-box;
+}
+body {
+	font-family: 'Montserrat', sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+}
+.progress {
+	background-color: #d8d8d8;
+	border-radius: 20px;
+	position: relative;
+	margin: 15px 0;
+	height: 30px;
+	width: 300px;
+}
+.progress-done {
+	background: linear-gradient(to left, #F2909C, #FF9472);
+	box-shadow: 0 3px 3px -5px #F2909C, 0 2px 5px #F2909C;
+	border-radius: 20px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	/* dynamic - controlled by js */
+	height: 100%;
+	width: 0;
+	/* dynamic - controlled by js */
+	transition: 2s ease;
+}
+</style>
+
+</head>
+<body>
+<div id="app"></div><div id="bcl"><a style="font-size:8pt;text-decoration:none;" href="https://pixeljuggernaut.vercel.app">PixelJuggernaut</a></div>
+<script>
+const Progress = ({ done }) => {
+    const [style, setStyle] = React.useState({});
+    setTimeout(() => {
+        const newStyle = {
+            opacity: 1,
+            width: `${done}%`
+        };
+        setStyle(newStyle);
+    }, 1000);
+    return /*#__PURE__*/(
+        React.createElement("div", { class: "progress" }, /*#__PURE__*/
+            React.createElement("div", { class: "progress-done", style: style },
+                done, "%")));
+};
+const App = () => /*#__PURE__*/
+    React.createElement(React.Fragment, null, /*#__PURE__*/
+        React.createElement("h1", null, "React Progress Bar"), /*#__PURE__*/
+        React.createElement(Progress, { done: "30" }), /*#__PURE__*/
+        React.createElement(Progress, { done: "50" }), /*#__PURE__*/
+        React.createElement(Progress, { done: "70" }), /*#__PURE__*/
+        React.createElement(Progress, { done: "100" }));
+ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById('app'));
+</script>
+
+</body>
+</html>
