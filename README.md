@@ -10,6 +10,8 @@ Made with
 ## [01.08.2023]
 
 - New Bootstrap Progress Bars
+- New Simple Slider with Thumbnails using Bootstrap
+- New React Progress Bar with Loading Effect
 
 ## [25.07.2023]
 
